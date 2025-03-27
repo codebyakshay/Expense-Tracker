@@ -1,16 +1,17 @@
+import { MaterialIcons } from "@expo/vector-icons";
+
 // navigation defualt import
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+//constants
+import { GLOBALSTYLES } from "./constant/styles";
+
 // screens
 import AllExpenses from "./screens/AllExpenses";
 import ManageExpenses from "./screens/ManageExpenses";
 import RecentExpenses from "./screens/RecentExpenses";
-
-//constants
-
-import GlobalStyles from "./constant/styles";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -20,15 +21,24 @@ function ExpenseOverview() {
     <Tab.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: GlobalStyles,
+          backgroundColor: GLOBALSTYLES.colors.primary500,
         },
+        headerTintColor: "white",
+        tabBarStyle: {
+          backgroundColor: GLOBALSTYLES.colors.primary500,
+        },
+        tabBarActiveTintColor: GLOBALSTYLES.colors.accent500,
       }}
     >
       <Tab.Screen
         name="recent expense"
         component={RecentExpenses}
         options={{
-          title: "Recent Expenses",
+          title: "Recent expenses",
+          tabBarLabel: "Recent",
+          tabBarIcon: ({ color, focused, size }) => (
+            <MaterialIcons name="hourglass-empty" size={size} color={color} />
+          ),
         }}
       />
       <Tab.Screen
@@ -36,6 +46,9 @@ function ExpenseOverview() {
         component={AllExpenses}
         options={{
           title: "All Expenses",
+          tabBarIcon: ({ color, focused, size }) => (
+            <MaterialIcons name="date-range" size={size} color={color} />
+          ),
         }}
       />
     </Tab.Navigator>
