@@ -1,4 +1,6 @@
+// react imports
 import { MaterialIcons } from "@expo/vector-icons";
+import { StatusBar } from "expo-status-bar";
 
 // navigation defualt import
 import { NavigationContainer } from "@react-navigation/native";
@@ -6,7 +8,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 //constants
-import { GLOBALSTYLES } from "./constant/styles";
+import { MainGloabalStyle } from "./constant/MainGloabalStyle";
 
 // screens
 import AllExpenses from "./screens/AllExpenses";
@@ -21,13 +23,13 @@ function ExpenseOverview() {
     <Tab.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: GLOBALSTYLES.colors.primary500,
+          backgroundColor: MainGloabalStyle.colors.primary500,
         },
         headerTintColor: "white",
         tabBarStyle: {
-          backgroundColor: GLOBALSTYLES.colors.primary500,
+          backgroundColor: MainGloabalStyle.colors.primary500,
         },
-        tabBarActiveTintColor: GLOBALSTYLES.colors.accent500,
+        tabBarActiveTintColor: MainGloabalStyle.colors.accent500,
       }}
     >
       <Tab.Screen
@@ -58,6 +60,7 @@ function ExpenseOverview() {
 export default function App() {
   return (
     <>
+      <StatusBar style="auto" />
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen

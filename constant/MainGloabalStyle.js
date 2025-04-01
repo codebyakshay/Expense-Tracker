@@ -1,4 +1,4 @@
-export const GLOBALSTYLES = {
+export const MainGloabalStyle = {
   colors: {
     primary50: "#e4d9fd",
     primary100: "#c6affc",
