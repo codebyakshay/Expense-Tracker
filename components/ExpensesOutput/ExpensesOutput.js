@@ -34,6 +34,30 @@ const DUMMY_EXPENSES = [
     amount: 18.59,
     date: new Date("2025-01-27"), // ✅ Correct format
   },
+  {
+    id: "e6",
+    description: "A pair of trousers",
+    amount: 89.29,
+    date: new Date("2025-03-28"), // ✅ Correct format
+  },
+  {
+    id: "e7",
+    description: "Some bananas",
+    amount: 5.99,
+    date: new Date("2025-01-27"), // ✅ Correct format
+  },
+  {
+    id: "e8",
+    description: "Book",
+    amount: 14.99,
+    date: new Date("2025-02-27"), // ✅ Correct format
+  },
+  {
+    id: "e9",
+    description: "Book",
+    amount: 18.59,
+    date: new Date("2025-01-27"), // ✅ Correct format
+  },
 ];
 
 export default function ExpensesOutput({ expenses, expensesPeriod }) {
