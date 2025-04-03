@@ -1,22 +1,7 @@
 export function getFormatedDate(date) {
-  const monthNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+}
 
-  const day = date.getDate().toString().padStart(2, "0"); // Ensure two-digit day
-  const month = monthNames[date.getMonth()]; // Get short month name
-  const year = date.getFullYear();
-
-  return `${day} ${month} ${year}`;
+export function getDateMinusDays(date, days) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() - days);
 }

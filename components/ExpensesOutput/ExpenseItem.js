@@ -20,6 +20,7 @@ export default function ExpenseItem({ id, description, amount, date }) {
           <Text style={[styles.description, styles.textBase]}>
             {description}
           </Text>
+
           <Text style={styles.textBase}>{getFormatedDate(date)}</Text>
         </View>
         <View style={styles.amountContainer}>
