@@ -8,16 +8,24 @@ export default function ManageExpenses({ route, navigation }) {
   const editingExpenseId = route.params?.expenseId;
   const isEditing = !!editingExpenseId;
 
-  function deleteExpenseFunction() {}
-  function cancelHandler() {}
+  function deleteExpenseFunction() {
+    navigation.goBack();
+  }
 
-  function confirmHandler() {}
+  function cancelHandler() {
+    navigation.goBack();
+  }
+
+  function confirmHandler() {
+    navigation.goBack();
+  }
 
   useLayoutEffect(() => {
     navigation.setOptions({
       title: isEditing ? "Edit Expense" : "Add Expense",
     });
   }, [isEditing, navigation]);
+
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
