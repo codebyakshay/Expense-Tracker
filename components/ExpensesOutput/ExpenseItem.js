@@ -3,12 +3,12 @@ import { MainGloabalStyle } from "../../constant/MainGloabalStyle";
 import { getFormatedDate } from "../../utils/date";
 import { useNavigation } from "@react-navigation/native";
 
-export default function ExpenseItem({ description, amount, date }) {
+export default function ExpenseItem({ id, description, amount, date }) {
   const navigation = useNavigation();
 
   function expensePressHandler() {
     //
-    navigation.navigate("Manage Expense");
+    navigation.navigate("Manage Expense", { expenseId: id });
   }
   return (
     <Pressable

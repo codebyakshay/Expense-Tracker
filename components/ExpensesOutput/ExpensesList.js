@@ -18,6 +18,6 @@ export default function ExpensesList({ expenses }) {
 
 const styles = StyleSheet.create({
   listContainer: {
-    padding: 5,
+    paddingVertical: 5,
   },
 });
