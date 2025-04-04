@@ -5,7 +5,13 @@ import { useSelector } from "react-redux";
 export default function AllExpenses() {
   const allExpenses = useSelector((state) => state.expense);
 
-  return <ExpensesOutput expensesPeriod={"Total"} expenses={allExpenses} />;
+  return (
+    <ExpensesOutput
+      expensesPeriod={"Total"}
+      expenses={allExpenses}
+      fallbackText={"*No expenses Yet"}
+    />
+  );
 }
 
 const styles = StyleSheet.create({});
