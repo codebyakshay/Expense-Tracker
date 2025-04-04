@@ -1,36 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from "uuid";
+import uuid from "react-native-uuid";
 
 const initialState = [
   {
     id: "e1",
     description: "A pair of shoes",
     amount: 59.99,
-    date: new Date("2025-04-02"), // ✅ Within 7 days
-  },
-  {
-    id: "e2",
-    description: "Dinner at a Restaurant",
-    amount: 35.5,
-    date: new Date("2025-03-31"), // ✅ Within 7 days
-  },
-  {
-    id: "e3",
-    description: "Movie Tickets",
-    amount: 25.0,
-    date: new Date("2025-03-29"), // ✅ Within 7 days
-  },
-  {
-    id: "e4",
-    description: "Internet Bill",
-    amount: 60.0,
-    date: new Date("2025-03-24"), // ❌ OUTSIDE 7 days
+    date: "2025-04-02",
   },
   {
     id: "e5",
     description: "Gym Membership",
     amount: 40.0,
-    date: new Date("2025-03-22"), // ❌ OUTSIDE 7 days
+    date: "2025-03-22",
   },
 ];
 
@@ -41,7 +23,7 @@ export const expenseSlice = createSlice({
     // ✅ Add new expense
     addExpense: (state, { payload: { description, amount, date } }) => {
       state.push({
-        id: uuidv4(), // Generate a unique ID
+        id: uuid.v4(),
         description,
         amount,
         date,

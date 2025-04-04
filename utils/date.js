@@ -1,7 +1,15 @@
 export function getFormatedDate(date) {
-  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  const validDate = typeof date === "string" ? new Date(date) : date;
+  return `${validDate.getFullYear()}-${
+    validDate.getMonth() + 1
+  }-${validDate.getDate()}`;
 }
 
 export function getDateMinusDays(date, days) {
-  return new Date(date.getFullYear(), date.getMonth(), date.getDate() - days);
+  const validDate = typeof date === "string" ? new Date(date) : date;
+  return new Date(
+    validDate.getFullYear(),
+    validDate.getMonth(),
+    validDate.getDate() - days
+  );
 }
