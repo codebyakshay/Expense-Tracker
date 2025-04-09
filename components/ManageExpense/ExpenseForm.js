@@ -70,7 +70,6 @@ export default function ExpenseForm({
       description,
     };
 
-    console.log(expenseData);
     onSubmit(expenseData);
   }
 
@@ -98,6 +97,7 @@ export default function ExpenseForm({
           style={styles.rowInput}
         />
         <Input
+          isDate
           label={"Date"}
           inValid={!inputs.date.isValid}
           textInputConfig={{

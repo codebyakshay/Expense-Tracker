@@ -1,18 +1,34 @@
-import { useLayoutEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import IconButton from "../components/UI/IconButton";
-import { MainGloabalStyle } from "../constant/MainGloabalStyle";
-import Button from "../components/UI/Button";
-import { useDispatch, useSelector } from "react-redux";
+//defualt
+import { useLayoutEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
+
+// redux
 import {
   addExpense,
   removeExpense,
   updateExpense,
 } from "../redux/features/ExpenseSlice";
-import ExpenseForm from "../components/ManageExpense/ExpenseForm";
+import { useDispatch, useSelector } from "react-redux";
 
+// global styles
+import { MainGloabalStyle } from "../constant/MainGloabalStyle";
+
+//components
+import ExpenseForm from "../components/ManageExpense/ExpenseForm";
+import IconButton from "../components/UI/IconButton";
+
+// utils
+import { deleteExpenses, storeExpense, updateExpenses } from "../utils/http";
+import LoadingOverlay from "../components/UI/LoadingOverlay";
+import ErrorOverlay from "../components/UI/ErrorOverlay";
+//
+
+// <MAIN SCREEN>
 export default function ManageExpenses({ route, navigation }) {
   const dispatch = useDispatch();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState();
 
   const allExpenses = useSelector((state) => state.expense);
   const editingExpenseId = route.params?.expenseId;
@@ -22,22 +38,41 @@ export default function ManageExpenses({ route, navigation }) {
     (expense) => expense.id === editingExpenseId
   );
 
-  function deleteExpenseFunction() {
-    dispatch(removeExpense(editingExpenseId));
-    navigation.goBack();
+  async function deleteExpenseFunction() {
+    setIsSubmitting(true);
+
+    try {
+      await deleteExpenses(editingExpenseId);
+      dispatch(removeExpense(editingExpenseId));
+      navigation.goBack();
+    } catch (error) {
+      setError("Could not delete expenses - try again later please!");
+      setIsSubmitting(false);
+    }
   }
 
   function cancelHandler() {
     navigation.goBack();
   }
 
-  function confirmHandler(expenseData) {
-    if (isEditing) {
-      dispatch(updateExpense({ ...expenseData, id: editingExpenseId }));
-    } else {
-      dispatch(addExpense(expenseData));
+  async function confirmHandler(expenseData) {
+    setIsSubmitting(true);
+
+    try {
+      if (isEditing) {
+        dispatch(updateExpense({ ...expenseData, id: editingExpenseId }));
+        await updateExpenses(editingExpenseId, expenseData);
+        setIsSubmitting(false);
+      } else {
+        const id = await storeExpense(expenseData);
+        dispatch(addExpense({ ...expenseData, id: id }));
+        setIsSubmitting(false);
+      }
+      navigation.goBack();
+    } catch (err) {
+      setError("Cannot Save Data - please try again later");
+      setIsSubmitting(false);
     }
-    navigation.goBack();
   }
 
   useLayoutEffect(() => {
@@ -45,6 +80,15 @@ export default function ManageExpenses({ route, navigation }) {
       title: isEditing ? "Edit Expense" : "Add Expense",
     });
   }, [isEditing, navigation]);
+
+  function errorOverlayHandler() {
+    setError();
+  }
+
+  if (isSubmitting) <LoadingOverlay />;
+
+  if (error && !isSubmitting)
+    <ErrorOverlay message={error} onConfirm={errorOverlayHandler} />;
 
   return (
     <View style={styles.container}>

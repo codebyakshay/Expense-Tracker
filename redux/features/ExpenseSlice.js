@@ -1,29 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import uuid from "react-native-uuid";
 
-const initialState = [
-  {
-    id: "e1",
-    description: "A pair of shoes",
-    amount: 59.99,
-    date: "2025-04-02",
-  },
-  {
-    id: "e5",
-    description: "Gym Membership",
-    amount: 40.0,
-    date: "2025-03-22",
-  },
-];
+// ✅ Initial state: now empty
+const initialState = [];
 
 export const expenseSlice = createSlice({
   name: "expense",
   initialState,
   reducers: {
-    // ✅ Add new expense
-    addExpense: (state, { payload: { description, amount, date } }) => {
+    // ✅ Add new expense using the ID passed from outside (Firebase)
+    addExpense: (state, { payload: { id, description, amount, date } }) => {
       state.push({
-        id: uuid.v4(),
+        id,
         description,
         amount,
         date,
@@ -43,11 +30,16 @@ export const expenseSlice = createSlice({
         expense.date = date ?? expense.date;
       }
     },
+
+    // ✅ Set expenses (like useReducer)
+    setExpenses: (state, action) => {
+      return action.payload.slice().reverse(); // to mimic the context behavior
+    },
   },
 });
 
 // ✅ Export actions
-export const { addExpense, removeExpense, updateExpense } =
+export const { addExpense, removeExpense, updateExpense, setExpenses } =
   expenseSlice.actions;
 
 // ✅ Export reducer
