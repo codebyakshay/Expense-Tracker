@@ -9,7 +9,7 @@ Track your income and expenses, view your balance in real-time, and gain better 
 
 ## 🧾 Features
 
-- Add income and expense entries
+- Add expense entries
 - Real-time balance updates
 - Transaction history with delete option
 - Categorize entries (optional)
