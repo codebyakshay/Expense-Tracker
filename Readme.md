@@ -7,8 +7,6 @@ Track your income and expenses, view your balance in real-time, and gain better 
 
 ![Expense Tracker Demo](./WhatsApp%20Video%202025-04-17%20at%2012.36.05.gif)
 
-> Ensure the `.gif` file is placed inside the `assets` folder or update the path accordingly.
-
 ## 🧾 Features
 
 - Add income and expense entries
